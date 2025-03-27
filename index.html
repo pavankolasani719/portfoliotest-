@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pavan Kolasani - DevOps Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             margin: 0;
@@ -11,32 +12,33 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             color: #fff;
             line-height: 1.6;
             background: #0a0a0a;
             overflow-x: hidden;
+            position: relative;
         }
         #particles-js {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
-            z-index: -1;
+            z-index: 0;
         }
         header {
             text-align: center;
             padding: 4rem 0;
-            background: rgba(10, 10, 10, 0.8);
             position: relative;
+            z-index: 1;
         }
         header h1 {
             font-size: 3.5rem;
             font-weight: 700;
-            color: #fff;
+            color: #00ccff;
             letter-spacing: 2px;
+            animation: bounce 2s infinite;
         }
         header p {
             font-size: 1.5rem;
@@ -49,7 +51,7 @@
             text-align: center;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 2;
         }
         nav a {
             color: #fff;
@@ -63,12 +65,15 @@
             color: #00ccff;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1rem;
+            position: relative;
+            z-index: 1;
         }
         section {
             margin: 3rem 0;
+            animation: fadeIn 1s ease-in;
         }
         h2 {
             font-size: 2rem;
@@ -83,9 +88,21 @@
             font-size: 1.1rem;
             color: #ddd;
         }
+        .tools {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .tool-icon {
+            font-size: 3rem;
+            color: #00ccff;
+            animation: rotate 4s linear infinite;
+        }
         .projects {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         .project-card {
@@ -95,7 +112,7 @@
             transition: transform 0.3s;
         }
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: scale(1.05);
         }
         .project-card h3 {
             font-size: 1.4rem;
@@ -114,20 +131,41 @@
         .project-card a:hover {
             text-decoration: underline;
         }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .contact-links a {
+            color: #00ccff;
+            font-size: 2rem;
+            transition: transform 0.3s;
+        }
+        .contact-links a:hover {
+            transform: rotate(360deg);
+        }
         footer {
             text-align: center;
             padding: 1.5rem;
             background: rgba(10, 10, 10, 0.9);
             color: #fff;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
-        .contact-links a {
-            color: #00ccff;
-            text-decoration: none;
-            margin: 0 0.5rem;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
         }
-        .contact-links a:hover {
-            text-decoration: underline;
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -139,52 +177,69 @@
     </header>
     <nav>
         <a href="#about">About</a>
+        <a href="#tools">Tools</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
     </nav>
     <div class="container">
         <section id="about">
             <h2>About Me</h2>
-            <p>Hi, I'm Pavan Kolasani, a DevOps Engineer with a passion for automating and optimizing software delivery pipelines. I specialize in cloud infrastructure, CI/CD workflows, and containerization technologies like Docker and Kubernetes. When I'm not streamlining deployments, I enjoy exploring new tools and technologies.</p>
+            <p>I'm Pavan Kolasani, a DevOps Engineer dedicated to bridging development and operations through automation and scalable infrastructure. With expertise in cloud platforms, CI/CD pipelines, and container orchestration, I thrive on solving complex deployment challenges. My experience spans multiple industries, from startups to enterprises, and I’m passionate about optimizing workflows. Outside of work, I enjoy tinkering with new tech, hiking, and contributing to open-source projects.</p>
+        </section>
+        <section id="tools">
+            <h2>Tools & Technologies</h2>
+            <div class="tools">
+                <i class="fab fa-docker tool-icon" title="Docker"></i>
+                <i class="fab fa-aws tool-icon" title="AWS"></i>
+                <i class="fas fa-cubes tool-icon" title="Kubernetes"></i>
+                <i class="fab fa-jenkins tool-icon" title="Jenkins"></i>
+                <i class="fab fa-git-alt tool-icon" title="Git"></i>
+            </div>
         </section>
         <section id="projects">
             <h2>Projects</h2>
             <div class="projects">
                 <div class="project-card">
                     <h3>CI/CD Pipeline Automation</h3>
-                    <p>Built a fully automated CI/CD pipeline using Jenkins, GitHub Actions, and AWS for a microservices-based application.</p>
+                    <p>Designed and implemented a CI/CD pipeline using Jenkins and GitHub Actions, integrated with AWS ECS for a microservices app, reducing deployment time by 60%.</p>
                     <a href="https://github.com/yourusername/project1" target="_blank">View Project</a>
                 </div>
                 <div class="project-card">
                     <h3>Kubernetes Cluster Deployment</h3>
-                    <p>Deployed a scalable Kubernetes cluster on GCP, implementing auto-scaling and monitoring with Prometheus and Grafana.</p>
+                    <p>Deployed a highly available Kubernetes cluster on GCP with auto-scaling, monitored via Prometheus and Grafana, supporting a production workload.</p>
                     <a href="https://github.com/yourusername/project2" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Infrastructure as Code</h3>
+                    <p>Automated AWS infrastructure provisioning using Terraform, including VPCs, EC2 instances, and RDS, with a focus on reproducibility.</p>
+                    <a href="https://github.com/yourusername/project3" target="_blank">View Project</a>
                 </div>
             </div>
         </section>
         <section id="contact">
             <h2>Contact</h2>
-            <p class="contact-links">
-                Email: <a href="mailto:pavan.kolasani@example.com">pavan.kolasani@example.com</a> | 
-                GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a> | 
-                LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a>
-            </p>
+            <p>Reach out to me:</p>
+            <div class="contact-links">
+                <a href="mailto:pavan.kolasani@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/yourusername" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
         </section>
     </div>
     <footer>
         <p>© 2025 Pavan Kolasani. All rights reserved.</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": ["#00ccff", "#ff66cc", "#66ff66"] },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.7, "random": true },
                 "size": { "value": 4, "random": true },
                 "line_linked": { "enable": true, "distance": 120, "color": "#ffffff", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 4, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+                "move": { "enable": true, "speed": 5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
             },
             "interactivity": {
                 "detect_on": "canvas",
@@ -194,7 +249,6 @@
             "retina_detect": true
         });
 
-        // Smooth scrolling for nav links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
