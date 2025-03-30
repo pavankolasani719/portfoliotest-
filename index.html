@@ -193,6 +193,43 @@
             font-size: 1.1rem;
             color: #ccc;
         }
+        .clients-section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(30, 30, 60, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            overflow: hidden;
+        }
+        .clients-marquee {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        .clients-marquee img {
+            display: block;
+            width: 150px;
+            height: auto;
+            margin: 20px auto;
+            transition: transform 0.3s ease;
+            object-fit: contain;
+            background: url('https://via.placeholder.com/150x50?text=Logo+Failed') no-repeat center;
+            background-size: contain;
+        }
+        .clients-marquee img:hover {
+            transform: scale(1.1);
+        }
+        .clients-marquee:hover div {
+            animation-play-state: paused;
+        }
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .clients-marquee div {
+            animation: slideDown 8s linear infinite;
+        }
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -313,18 +350,27 @@
                 </div>
                 <div class="experience-card">
                     <h3>Cloud Engineer - S3S Consultancy Services PTY LTD</h3>
-                    <div class="duration">[Start Date] - [End Date]</div>
+                    <div class="duration">Sep 2021 - Nov 2022</div>
                     <p>[Describe your responsibilities and achievements here.]</p>
                 </div>
                 <div class="experience-card">
-                    <h3>Associate DevOps engineer  - Slash Networks</h3>
-                    <div class="duration">[Start Date] - [End Date]</div>
+                    <h3>Associate DevOps Engineer - Slash Networks</h3>
+                    <div class="duration">July 2019 - Sep 2021</div>
                     <p>[Describe your responsibilities and achievements here.]</p>
                 </div>
                 <div class="experience-card">
                     <h3>Desktop Engineer - Imaxon</h3>
-                    <div class="duration">[Start Date] - [End Date]</div>
+                    <div class="duration">June 2016 - July 2017</div>
                     <p>[Describe your responsibilities and achievements here.]</p>
+                </div>
+            </div>
+        </section>
+        <section class="clients-section">
+            <h2>End Clients</h2>
+            <div class="clients-marquee">
+                <div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/NBN_Co_logo.svg" alt="NBN Logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/8/88/Suncorp_Group_logo.svg" alt="Suncorp Logo">
                 </div>
             </div>
         </section>
