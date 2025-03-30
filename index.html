@@ -85,6 +85,17 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             animation: slideIn 1s ease-out;
         }
+        #about {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
         h2 {
             font-size: 2.5rem;
             color: #fff;
@@ -99,36 +110,88 @@
             font-size: 1.2rem;
             color: #d0d0d0;
         }
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            perspective: 800px;
+        .tools-swarm {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
         }
         .tool-item {
+            position: absolute;
+            width: 70px;
+            height: 70px;
             text-align: center;
-            padding: 1rem;
-            background: rgba(40, 40, 80, 0.8);
-            border-radius: 8px;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background: rgba(40, 40, 80, 0.85);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+            animation: swarmPulse 5s ease-in-out infinite;
+            filter: brightness(0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .tools-swarm:hover .tool-item {
+            animation-play-state: paused;
         }
         .tool-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.5);
+            transform: scale(1.5) translateZ(80px) !important;
+            filter: brightness(1.3);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.9);
         }
         .tool-icon {
-            font-size: 2.5rem;
-            color: #00d4ff;
-            animation: orbitRotate 8s infinite linear;
-            display: inline-block;
-            transform-origin: center;
+            font-size: 2.2rem;
         }
         .tool-item span {
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #e0e0e0;
+            margin-top: 0.3rem;
+        }
+        .tool-item:nth-child(1) { top: 20px; left: 160px; animation-delay: 0s; }
+        .tool-item:nth-child(2) { top: 60px; left: 280px; animation-delay: 0.3s; }
+        .tool-item:nth-child(3) { top: 120px; left: 340px; animation-delay: 0.6s; }
+        .tool-item:nth-child(4) { top: 200px; left: 320px; animation-delay: 0.9s; }
+        .tool-item:nth-child(5) { top: 280px; left: 280px; animation-delay: 1.2s; }
+        .tool-item:nth-child(6) { top: 340px; left: 220px; animation-delay: 1.5s; }
+        .tool-item:nth-child(7) { top: 360px; left: 140px; animation-delay: 1.8s; }
+        .tool-item:nth-child(8) { top: 340px; left: 60px; animation-delay: 2.1s; }
+        .tool-item:nth-child(9) { top: 280px; left: 20px; animation-delay: 2.4s; }
+        .tool-item:nth-child(10) { top: 200px; left: 40px; animation-delay: 2.7s; }
+        .tool-item:nth-child(11) { top: 120px; left: 60px; animation-delay: 3s; }
+        .tool-item:nth-child(12) { top: 60px; left: 100px; animation-delay: 3.3s; }
+        .tool-item:nth-child(13) { top: 100px; left: 220px; animation-delay: 3.6s; }
+        .tool-item:nth-child(14) { top: 240px; left: 180px; animation-delay: 3.9s; }
+        .experience-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .experience-card {
+            background: rgba(40, 40, 80, 0.9);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+        .experience-card h3 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .experience-card .duration {
+            font-size: 1rem;
+            color: #66ffcc;
+            margin-bottom: 0.8rem;
+        }
+        .experience-card p {
+            font-size: 1.1rem;
+            color: #ccc;
         }
         .projects-grid {
             display: grid;
@@ -194,10 +257,10 @@
             from { text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff; }
             to { text-shadow: 0 0 20px #00d4ff, 0 0 40px #66ffcc; }
         }
-        @keyframes orbitRotate {
-            0% { transform: rotateY(0deg) translateZ(10px); }
-            50% { transform: rotateY(180deg) translateZ(10px); }
-            100% { transform: rotateY(360deg) translateZ(10px); }
+        @keyframes swarmPulse {
+            0% { transform: translateZ(0px) scale(1); filter: brightness(0.9); }
+            50% { transform: translateZ(40px) scale(1.05); filter: brightness(1.1); }
+            100% { transform: translateZ(0px) scale(1); filter: brightness(0.9); }
         }
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(50px); }
@@ -213,318 +276,56 @@
     </header>
     <nav>
         <a href="#about">About</a>
-        <a href="#tools">Tools</a>
+        <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
     </nav>
     <div class="container">
         <section id="about">
-            <h2>About Me</h2>
-            <p>I’m Pavan Kolasani, a DevOps Engineer with over 5 years of experience optimizing cloud infrastructure and streamlining CI/CD pipelines. I specialize in cloud migration, container orchestration, and Infrastructure as Code, delivering scalable, reliable systems. My career spans roles in Australia and India, where I’ve collaborated with cross-functional teams to reduce deployment times and enhance system performance. When I’m not automating workflows, I’m exploring cutting-edge DevOps tools, hiking, or contributing to open-source initiatives.</p>
-        </section>
-        <section id="tools">
-            <h2>Tools & Technologies</h2>
-            <div class="tools-grid">
-                <div class="tool-item"><i class="fab fa-docker tool-icon"></i><span>Docker</span></div>
-                <div class="tool-item"><i class="fab fa-aws tool-icon"></i><span>AWS</span></div>
-                <div class="tool-item"><i class="fab fa-microsoft tool-icon"></i><span>Azure</span></div>
-                <div class="tool-item"><i class="fas fa-cubes tool-icon"></i><span>Kubernetes</span></div>
-                <div class="tool-item"><i class="fab fa-jenkins tool-icon"></i><span>Jenkins</span></div>
-                <div class="tool-item"><i class="fab fa-git-alt tool-icon"></i><span>Git</span></div>
-                <div class="tool-item"><i class="fas fa-tools tool-icon"></i><span>Terraform</span></div>
-                <div class="tool-item"><i class="fab fa-github tool-icon"></i><span>GitHub Actions</span></div>
-                <div class="tool-item"><i class="fas fa-chart-line tool-icon"></i><span>Prometheus</span></div>
-                <div class="tool-item"><i class="fas fa-tachometer-alt tool-icon"></i><span>Grafana</span></div>
-                <div class="tool-item"><i class="fas fa-terminal tool-icon"></i><span>Bash</span></div>
-                <div class="tool-item"><i class="fab fa-python tool-icon"></i><span>Python</span></div>
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>I’m Pavan Kolasani, a DevOps Engineer with over 5 years of experience optimizing cloud infrastructure and streamlining CI/CD pipelines. I specialize in cloud migration, container orchestration, and Infrastructure as Code, delivering scalable, reliable systems. Proficient in modern stacks like MongoDB and React for building robust applications, I’ve worked across Australia and India, reducing deployment times and boosting performance. I’m passionate about automation, exploring new tools, hiking, and open-source contributions.</p>
+            </div>
+            <div class="tools-swarm">
+                <div class="tool-item"><i class="fab fa-docker tool-icon" style="color: #0db7ed;"></i><span>Docker</span></div>
+                <div class="tool-item"><i class="fab fa-aws tool-icon" style="color: #ff9900;"></i><span>AWS</span></div>
+                <div class="tool-item"><i class="fab fa-microsoft tool-icon" style="color: #0089d6;"></i><span>Azure</span></div>
+                <div class="tool-item"><i class="fas fa-cubes tool-icon" style="color: #326ce5;"></i><span>Kubernetes</span></div>
+                <div class="tool-item"><i class="fab fa-jenkins tool-icon" style="color: #d24939;"></i><span>Jenkins</span></div>
+                <div class="tool-item"><i class="fab fa-git-alt tool-icon" style="color: #f05032;"></i><span>Git</span></div>
+                <div class="tool-item"><i class="fas fa-tools tool-icon" style="color: #623ce4;"></i><span>Terraform</span></div>
+                <div class="tool-item"><i class="fab fa-github tool-icon" style="color: #2088ff;"></i><span>GitHub Actions</span></div>
+                <div class="tool-item"><i class="fas fa-chart-line tool-icon" style="color: #e6522c;"></i><span>Prometheus</span></div>
+                <div class="tool-item"><i class="fas fa-tachometer-alt tool-icon" style="color: #f5a623;"></i><span>Grafana</span></div>
+                <div class="tool-item"><i class="fas fa-terminal tool-icon" style="color: #4eaa25;"></i><span>Bash</span></div>
+                <div class="tool-item"><i class="fab fa-python tool-icon" style="color: #3776ab;"></i><span>Python</span></div>
+                <div class="tool-item"><i class="fas fa-database tool-icon" style="color: #47a248;"></i><span>MongoDB</span></div>
+                <div class="tool-item"><i class="fab fa-react tool-icon" style="color: #61dafb;"></i><span>React</span></div>
             </div>
         </section>
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Azure AKS Deployment</h3>
-                    <p>Deployed and managed Azure Kubernetes Service (AKS) clusters for Dev, QA, and Production, using Terraform and YAML manifests. Integrated Azure Monitor for observability, reducing downtime by 40%.</p>
-                    <a href="https://github.com/pavankolasani719/aks-deployment" target="_blank">View Project</a>
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <h3>DevOps Engineer - TechSavy</h3>
+                    <div class="duration">Nov 2022 - Present</div>
+                    <p>Led cloud infrastructure optimization and CI/CD pipeline automation for multiple end clients, including NBN. Implemented Kubernetes clusters and Terraform scripts, reducing deployment times by 50% and enhancing system reliability for critical telecom services.</p>
                 </div>
-                <div class="project-card">
-                    <h3>CI/CD Pipeline Optimization</h3>
-                    <p>Built a multi-stage CI/CD pipeline with Jenkins and GitHub Actions, containerizing apps with Docker and deploying to AWS ECS. Cut deployment time by 60% and improved release reliability.</p>
-                    <a href="https://github.com/pavankolasani719/cicd-pipeline" target="_blank">View Project</a>
+                <div class="experience-card">
+                    <h3>Cloud Engineer - S3S Consultancy Services PTY LTD</h3>
+                    <div class="duration">[Start Date] - [End Date]</div>
+                    <p>[Describe your responsibilities and achievements here.]</p>
                 </div>
-                <div class="project-card">
-                    <h3>Infrastructure Automation</h3>
-                    <p>Automated AWS and Azure infrastructure with Terraform and ARM templates, provisioning VPCs, VMs, and databases. Implemented Azure Key Vault for secrets, enhancing security compliance.</p>
-                    <a href="https://github.com/pavankolasani719/infra-automation" target="_blank">View Project</a>
+                <div class="experience-card">
+                    <h3>Associate DevOps engineer  - Slash Networks</h3>
+                    <div class="duration">[Start Date] - [End Date]</div>
+                    <p>[Describe your responsibilities and achievements here.]</p>
                 </div>
-                <div class="project-card">
-                    <h3>Microservices Monitoring</h3>
-                    <p>Set up Prometheus and Grafana to monitor a Kubernetes-based microservices app, creating custom dashboards for latency and error tracking. Reduced incident response time by 30%.</p>
-                    <a href="https://github.com/pavankolasani719/microservices-monitoring" target="_blank">View Project</a>
+                <div class="experience-card">
+                    <h3>Desktop Engineer - Imaxon</h3>
+                    <div class="duration">[Start Date] - [End Date]</div>
+                    <p>[Describe your responsibilities and achievements here.]</p>
                 </div>
-            </div>
-        </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Let’s connect to discuss DevOps solutions or collaboration opportunities:</p>
-            <div class="contact-links">
-                <a href="mailto:pavankolasani719@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/pavankolasani719" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/pavankolasani" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </section>
-    </div>
-    <footer>
-        <p>© 2025 Pavan Kolasani. All rights reserved.</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-那么，我没有提到“Mango DB”或“Ract”（可能是“MongoDB”和“React”的拼写错误），但我假设您指的是使用MongoDB和React的技术堆栈。如果是这样，我可以在您的投资组合中添加对这些工具的引用，以展示您对它们的熟练程度。
-
-    以下是基于您的要求更新后的投资组合，包括更多的DevOps工具，并采用类似Julián Sanmartino网站（https://juliansanmartino.netlify.app/#work）的旋转效果：
-
----
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pavan Kolasani - DevOps Engineer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: #fff;
-            line-height: 1.8;
-            background: linear-gradient(135deg, #0a0a23, #1a1a40);
-            overflow-x: hidden;
-            position: relative;
-        }
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.8;
-        }
-        header {
-            text-align: center;
-            padding: 5rem 0;
-            position: relative;
-            z-index: 1;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        header h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.7);
-            letter-spacing: 3px;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-        header p {
-            font-size: 1.8rem;
-            color: #e0e0e0;
-            margin-top: 0.5rem;
-            letter-spacing: 1px;
-        }
-        nav {
-            background: rgba(20, 20, 40, 0.95);
-            padding: 1.2rem 0;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 2;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        nav a {
-            color: #fff;
-            margin: 0 2rem;
-            text-decoration: none;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            transition: color 0.3s, transform 0.3s;
-        }
-        nav a:hover {
-            color: #00d4ff;
-            transform: translateY(-3px);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-        section {
-            margin: 4rem 0;
-            padding: 2rem;
-            background: rgba(30, 30, 60, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            animation: slideIn 1s ease-out;
-        }
-        h2 {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #00d4ff, #66ffcc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #d0d0d0;
-        }
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            perspective: 800px;
-        }
-        .tool-item {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(40, 40, 80, 0.8);
-            border-radius: 8px;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-        .tool-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.5);
-        }
-        .tool-icon {
-            font-size: 2.5rem;
-            color: #00d4ff;
-            animation: spin 10s linear infinite;
-            transform-origin: 50% 50%;
-        }
-        .tool-item span {
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 1rem;
-            color: #e0e0e0;
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
-        .project-card {
-            background: rgba(40, 40, 80, 0.9);
-            padding: 2rem;
-            border-radius: 12px;
-            transition: transform 0.4s, box-shadow 0.4s;
-        }
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
-        }
-        .project-card h3 {
-            font-size: 1.6rem;
-            color: #fff;
-            margin-bottom: 0.8rem;
-        }
-        .project-card p {
-            font-size: 1.1rem;
-            color: #ccc;
-        }
-        .project-card a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 1rem;
-            transition: color 0.3s;
-        }
-        .project-card a:hover {
-            color: #66ffcc;
-        }
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-        .contact-links a {
-            color: #00d4ff;
-            font-size: 2.5rem;
-            transition: transform 0.5s, color 0.3s;
-        }
-        .contact-links a:hover {
-            transform: scale(1.2) rotate(10deg);
-            color: #66ffcc;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(10, 10, 30, 0.95);
-            color: #bbb;
-            font-size: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff; }
-            to { text-shadow: 0 0 20px #00d4ff, 0 0 40px #66ffcc; }
-        }
-        @keyframes spin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-    <div id="particles-js"></div>
-    <header>
-        <h1>Pavan Kolasani</h1>
-        <p>DevOps Engineer | Cloud Architect | Automation Enthusiast</p>
-    </header>
-    <nav>
-        <a href="#about">About</a>
-        <a href="#tools">Tools</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <div class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>I’m Pavan Kolasani, a DevOps Engineer with over 5 years of experience optimizing cloud infrastructure and streamlining CI/CD pipelines. I specialize in cloud migration, container orchestration, and Infrastructure as Code, delivering scalable, reliable systems. Proficient in modern stacks like MongoDB and React for building robust applications, I’ve worked across Australia and India, reducing deployment times and boosting performance. I’m passionate about automation, exploring new tools, hiking, and open-source contributions.</p>
-        </section>
-        <section id="tools">
-            <h2>Tools & Technologies</h2>
-            <div class="tools-grid">
-                <div class="tool-item"><i class="fab fa-docker tool-icon"></i><span>Docker</span></div>
-                <div class="tool-item"><i class="fab fa-aws tool-icon"></i><span>AWS</span></div>
-                <div class="tool-item"><i class="fab fa-microsoft tool-icon"></i><span>Azure</span></div>
-                <div class="tool-item"><i class="fas fa-cubes tool-icon"></i><span>Kubernetes</span></div>
-                <div class="tool-item"><i class="fab fa-jenkins tool-icon"></i><span>Jenkins</span></div>
-                <div class="tool-item"><i class="fab fa-git-alt tool-icon"></i><span>Git</span></div>
-                <div class="tool-item"><i class="fas fa-tools tool-icon"></i><span>Terraform</span></div>
-                <div class="tool-item"><i class="fab fa-github tool-icon"></i><span>GitHub Actions</span></div>
-                <div class="tool-item"><i class="fas fa-chart-line tool-icon"></i><span>Prometheus</span></div>
-                <div class="tool-item"><i class="fas fa-tachometer-alt tool-icon"></i><span>Grafana</span></div>
-                <div class="tool-item"><i class="fas fa-terminal tool-icon"></i><span>Bash</span></div>
-                <div class="tool-item"><i class="fab fa-python tool-icon"></i><span>Python</span></div>
-                <div class="tool-item"><i class="fas fa-database tool-icon"></i><span>MongoDB</span></div>
-                <div class="tool-item"><i class="fab fa-react tool-icon"></i><span>React</span></div>
             </div>
         </section>
         <section id="projects">
@@ -596,9 +397,3 @@
     </script>
 </body>
 </html>
-```
-
----
-
-### Key Changes
-
