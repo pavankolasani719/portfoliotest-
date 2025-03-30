@@ -34,20 +34,44 @@
             position: relative;
             z-index: 1;
             background: rgba(0, 0, 0, 0.5);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         header h1 {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 800;
             color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.7);
-            letter-spacing: 3px;
-            animation: glow 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.7), 0 0 40px rgba(0, 212, 255, 0.5);
+            letter-spacing: 4px;
+            animation: glow 4s ease-in-out infinite alternate;
         }
-        header p {
-            font-size: 1.8rem;
-            color: #e0e0e0;
-            margin-top: 0.5rem;
-            letter-spacing: 1px;
+        .typewriter {
+            font-size: 2rem;
+            color: #66ffcc;
+            margin-top: 2rem;
+            height: 2.5rem;
+            overflow: hidden;
+        }
+        .typewriter span {
+            display: inline-block;
+            white-space: nowrap;
+            border-right: 3px solid #66ffcc;
+            animation: typing 4s steps(20, end), blink 0.75s step-end infinite, vanish 7s infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #66ffcc; }
+        }
+        @keyframes vanish {
+            0%, 50% { opacity: 1; }
+            75%, 100% { opacity: 0; }
         }
         nav {
             background: rgba(20, 20, 40, 0.95);
@@ -296,7 +320,7 @@
         }
         @keyframes swarmPulse {
             0% { transform: translateZ(0px) scale(1); filter: brightness(0.9); }
-            50% { transform: translateZ(40px) scale(1.05); filter: brightness(1.1); }
+            25% { transform: translateZ(40px) scale(1.05); filter: brightness(1.1); }
             100% { transform: translateZ(0px) scale(1); filter: brightness(0.9); }
         }
         @keyframes slideIn {
@@ -309,7 +333,9 @@
     <div id="particles-js"></div>
     <header>
         <h1>Pavan Kolasani</h1>
-        <p>DevOps Engineer | Cloud Architect | Automation Enthusiast</p>
+        <div class="typewriter">
+            <span id="type-text"></span>
+        </div>
     </header>
     <nav>
         <a href="#about">About</a>
@@ -375,27 +401,22 @@
             </div>
         </section>
         <section id="projects">
-            <h2>Projects</h2>
+            <h2>Fun Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>Azure AKS Deployment</h3>
-                    <p>Deployed and managed Azure Kubernetes Service (AKS) clusters for Dev, QA, and Production, using Terraform and YAML manifests. Integrated Azure Monitor for observability, reducing downtime by 40%.</p>
-                    <a href="https://github.com/pavankolasani719/aks-deployment" target="_blank">View Project</a>
+                    <h3>Thunderous Daffodil</h3>
+                    <p>A quirky web experiment blending dynamic visuals and interactivity, built with HTML, CSS, and JavaScript. Deployed on Netlify to showcase seamless CI/CD integration and playful front-end creativity.</p>
+                    <a href="https://thunderous-daffodil-8ca8fd.netlify.app/" target="_blank">Play Now</a>
                 </div>
                 <div class="project-card">
-                    <h3>CI/CD Pipeline Optimization</h3>
-                    <p>Built a multi-stage CI/CD pipeline with Jenkins and GitHub Actions, containerizing apps with Docker and deploying to AWS ECS. Cut deployment time by 60% and improved release reliability.</p>
-                    <a href="https://github.com/pavankolasani719/cicd-pipeline" target="_blank">View Project</a>
+                    <h3>Space Invader Shooter</h3>
+                    <p>A retro-inspired shooter game crafted with p5.js, featuring smooth controls and enemy waves. Hosted on Netlify with automated builds, it’s a fun dive into game dev and cloud deployment.</p>
+                    <a href="https://space-invader-shooter.netlify.app/" target="_blank">Play Now</a>
                 </div>
                 <div class="project-card">
-                    <h3>Infrastructure Automation</h3>
-                    <p>Automated AWS and Azure infrastructure with Terraform and ARM templates, provisioning VPCs, VMs, and databases. Implemented Azure Key Vault for secrets, enhancing security compliance.</p>
-                    <a href="https://github.com/pavankolasani719/infra-automation" target="_blank">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>Microservices Monitoring</h3>
-                    <p>Set up Prometheus and Grafana to monitor a Kubernetes-based microservices app with MongoDB backend and React frontend, creating custom dashboards for latency and error tracking. Reduced incident response time by 30%.</p>
-                    <a href="https://github.com/pavankolasani719/microservices-monitoring" target="_blank">View Project</a>
+                    <h3>Kolasani Calculator</h3>
+                    <p>A sleek, functional calculator app built with JavaScript and styled with CSS. Deployed on Netlify, it demonstrates clean code, responsive design, and my knack for practical, user-friendly tools.</p>
+                    <a href="https://kolasanicalculator.netlify.app/" target="_blank">Try It</a>
                 </div>
             </div>
         </section>
@@ -410,7 +431,7 @@
         </section>
     </div>
     <footer>
-        <p>© 1991 Pavan Kolasani. All rights reserved.</p>
+        <p>© 2025 Pavan Kolasani. All rights reserved.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -440,6 +461,18 @@
                 });
             });
         });
+
+        const words = ["DevOps Engineer", "Cloud Architect", "Automation Enthusiast"];
+        let wordIndex = 0;
+        const typeText = document.getElementById("type-text");
+
+        function updateText() {
+            typeText.textContent = words[wordIndex];
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(updateText, 7000);
+        }
+
+        updateText();
     </script>
 </body>
 </html>
