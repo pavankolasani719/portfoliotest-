@@ -327,6 +327,90 @@
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 320px;
+            height: 420px;
+            background: rgba(30, 30, 60, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .chatbot-header {
+            background: linear-gradient(to right, #00d4ff, #66ffcc);
+            padding: 12px;
+            text-align: center;
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: bold;
+        }
+        .chatbot-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            color: #d0d0d0;
+            font-size: 1.1rem;
+        }
+        .chatbot-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(40, 40, 80, 0.9);
+            word-wrap: break-word;
+        }
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            background: rgba(20, 20, 40, 0.95);
+        }
+        .chatbot-input input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background: #d0d0d0;
+            color: #333;
+            outline: none;
+            font-size: 1rem;
+        }
+        .chatbot-input button {
+            padding: 8px 15px;
+            background: #00d4ff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .chatbot-input button:hover {
+            background: #66ffcc;
+        }
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -431,8 +515,22 @@
         </section>
     </div>
     <footer>
-        <p>© 2025 Pavan Kolasani. All rights reserved.</p>
+        <p>© 1991 Pavan Kolasani. All rights reserved.</p>
     </footer>
+    <!-- Chatbot HTML -->
+    <div class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-comment" style="font-size: 1.8rem;"></i>
+    </div>
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">Hey, Let’s Chat!</div>
+        <div class="chatbot-body" id="chatbot-body">
+            <div class="chatbot-message">Hi there! What’s on your mind today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Type here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
@@ -465,14 +563,50 @@
         const words = ["DevOps Engineer", "Cloud Architect", "Automation Enthusiast"];
         let wordIndex = 0;
         const typeText = document.getElementById("type-text");
-
         function updateText() {
             typeText.textContent = words[wordIndex];
             wordIndex = (wordIndex + 1) % words.length;
             setTimeout(updateText, 7000);
         }
-
         updateText();
+
+        // Chatbot functionality
+        function toggleChatbot() {
+            const chatbot = document.getElementById("chatbot");
+            chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+        }
+
+        const responses = [
+            "Cool! Tell me more—what’s got you curious?",
+            "Nice one! Have you tried my <a href='#projects' style='color: #66ffcc;'>Fun Projects</a> yet?",
+            "Interesting! What else can I help you with?",
+            "Hey, that’s awesome! Want to chat about DevOps or something fun?"
+        ];
+
+        function sendMessage() {
+            const input = document.getElementById("chatbot-input");
+            const message = input.value.trim();
+            if (!message) return;
+
+            const body = document.getElementById("chatbot-body");
+            body.innerHTML += `<div class="chatbot-message">You: ${message}</div>`;
+            console.log("User message:", message); // Log to console instead of email
+            body.scrollTop = body.scrollHeight;
+
+            // Random engaging response
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            setTimeout(() => {
+                body.innerHTML += `<div class="chatbot-message">${randomResponse}</div>`;
+                body.scrollTop = body.scrollHeight;
+            }, 1000);
+
+            input.value = "";
+        }
+
+        // Send message on Enter key
+        document.getElementById("chatbot-input").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") sendMessage();
+        });
     </script>
 </body>
 </html>
