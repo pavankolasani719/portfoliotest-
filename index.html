@@ -441,6 +441,24 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
         .chatbot-toggle:hover { transform: scale(1.1); }
+        /* Music Toggle Styles */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .music-toggle:hover { transform: scale(1.1); }
+        .music-toggle i { font-size: 1.8rem; }
         @media (max-width: 768px) {
             .hero-content { flex-direction: column; }
             .tools-swarm { display: grid; grid-template-columns: repeat(3, 1fr); height: auto; }
@@ -524,7 +542,7 @@
                 </div>
                 <div class="testimonial-card">
                     <p>"Working with Pavan was a game-changer. His leadership in cloud architecture saved us time and resources."</p>
-                    <h3>- Jane Smith, S3S Consultancy</h3>
+                    <h3>- Mellisa, S3S Consultancy</h3>
                 </div>
             </div>
         </section>
@@ -578,6 +596,7 @@
         </div>
         <p>© <span id="year"></span> Pavan Kolasani. All rights reserved.</p>
     </footer>
+    <!-- Chatbot -->
     <div class="chatbot-toggle" onclick="toggleChatbot()">
         <i class="fas fa-comment" style="font-size: 1.8rem;"></i>
     </div>
@@ -590,6 +609,14 @@
             <input type="text" id="chatbot-input" placeholder="Type here...">
             <button onclick="sendMessage()">Send</button>
         </div>
+    </div>
+    <!-- Music Player -->
+    <audio id="background-music" loop muted>
+        <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="music-toggle" onclick="toggleMusic()">
+        <i class="fas fa-volume-mute" id="music-icon"></i>
     </div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -664,6 +691,29 @@
         document.getElementById("chatbot-input").addEventListener("keypress", function(e) {
             if (e.key === "Enter") sendMessage();
         });
+
+        // Music Toggle Functionality
+        const audio = document.getElementById("background-music");
+        const musicIcon = document.getElementById("music-icon");
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.classList.remove("fa-volume-up");
+                musicIcon.classList.add("fa-volume-mute");
+            } else {
+                audio.play();
+                musicIcon.classList.remove("fa-volume-mute");
+                musicIcon.classList.add("fa-volume-up");
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Ensure audio can play after user interaction (browser policy)
+        document.addEventListener("click", function() {
+            audio.muted = false; // Unmute after first interaction
+        }, { once: true });
     </script>
 </body>
 </html>
